@@ -98,7 +98,7 @@ show_menu() {
     echo ""
     echo -e "  ${WHITE}${BOLD}  ━━━━ 中国优化 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
-    echo -e "  ${YELLOW}  [5]${NC}  🇨🇳 配置国产 AI 模型（DeepSeek/Kimi/通义千问）"
+    echo -e "  ${YELLOW}  [5]${NC}  ⚙️  首次配置向导（选模型、选平台、填 API Key）"
     echo -e "  ${YELLOW}  [6]${NC}  💬 配置中国聊天平台（飞书/钉钉）"
     echo -e "  ${YELLOW}  [7]${NC}  🪞 设置国内镜像源"
     echo ""
