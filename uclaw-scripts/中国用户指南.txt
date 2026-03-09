@@ -160,4 +160,5 @@ U-Claw 已预装 52 个技能，以下是最实用的:
   - GitHub: github.com/dongsheng123132/u-claw
   - 邮箱: hefangsheng@gmail.com
   - 微信: 扫描 U 盘内「微信二维码.jpg」添加作者
-    （技术咨询、合作交流、问题反馈）
+  - 小红书: 扫描 U 盘内「小红书二维码.jpg」关注
+    （技术咨询、合作交流、问题反馈、教程更新）

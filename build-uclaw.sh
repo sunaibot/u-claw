@@ -147,8 +147,9 @@ if [ -d "$SCRIPTS_SRC" ]; then
     # 复制教程文档
     mkdir -p "$UCLAW_DIR/docs"
     cp "$SCRIPT_DIR/docs/教程-OpenClaw中国区完全指南.md" "$UCLAW_DIR/docs/" 2>/dev/null || true
-    # 复制微信二维码
+    # 复制二维码
     cp "$SCRIPT_DIR/微信二维码.jpg" "$UCLAW_DIR/" 2>/dev/null || true
+    cp "$SCRIPT_DIR/小红书二维码.jpg" "$UCLAW_DIR/" 2>/dev/null || true
     chmod +x "$UCLAW_DIR/启动菜单.command" "$UCLAW_DIR/运行.command" "$UCLAW_DIR/安装到电脑.command" 2>/dev/null || true
     ok "用户脚本已复制（含启动菜单、中国用户指南、微信二维码）"
 else

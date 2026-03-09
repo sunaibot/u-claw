@@ -269,6 +269,10 @@ A: No. U-Claw bundles Windows Node.js, runs natively via `.bat`.
 
   <img src="微信二维码.jpg" alt="WeChat QR" width="200">
 
+- **Xiaohongshu 小红书**: Follow / 关注
+
+  <img src="小红书二维码.jpg" alt="Xiaohongshu QR" width="200">
+
 - **Email 邮箱**: hefangsheng@gmail.com
 - **GitHub**: [@dongsheng123132](https://github.com/dongsheng123132)
 - **Website 官网**: [u-claw.org](https://u-claw.org)
