@@ -4,7 +4,7 @@
 ║          OpenClaw 离线安装 U 盘                           ║
 ║                                                          ║
 ║          by OpenClaw Community                           ║
-║          u-claw.vercel.app                               ║
+║          u-claw.org                                      ║
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝
 
@@ -117,4 +117,4 @@ A: OpenClaw 本身需要联网调用 AI API（如 Claude、DeepSeek）。
 获取帮助
 ═══════════════
 - OpenClaw 官方: https://github.com/openclaw/openclaw
-- U-Claw 项目: https://u-claw.vercel.app
+- U-Claw 项目: https://u-claw.org

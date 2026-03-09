@@ -283,10 +283,10 @@ A: Yes for x64 Linux. Use `bash ./运行.sh` from the release bundle.
 - **Xiaohongshu 小红书**: [关注主页 / Follow](https://xhslink.com/m/6mf7Mq2M5wP)
 - **Email 邮箱**: hefangsheng@gmail.com
 - **GitHub**: [@dongsheng123132](https://github.com/dongsheng123132)
-- **Website 官网**: [u-claw.vercel.app](https://u-claw.vercel.app)
+- **Website 官网**: [u-claw.org](https://u-claw.org)
 
 ---
 
 **Made with 🦞 by [dongsheng](https://github.com/dongsheng123132) & OpenClaw Community**
 
-**Website: [u-claw.vercel.app](https://u-claw.vercel.app)** · **Email: hefangsheng@gmail.com**
+**Website: [u-claw.org](https://u-claw.org)** · **Email: hefangsheng@gmail.com**

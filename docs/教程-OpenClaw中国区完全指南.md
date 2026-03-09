@@ -508,7 +508,7 @@ docker compose up -d
 
 ### 社区
 
-- U-Claw 官网: [u-claw.vercel.app](https://u-claw.vercel.app)
+- U-Claw 官网: [u-claw.org](https://u-claw.org)
 - OpenClaw 官方: [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
 
 ---

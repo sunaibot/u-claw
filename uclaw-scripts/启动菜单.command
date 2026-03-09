@@ -439,7 +439,7 @@ do_china_channels() {
             ;;
         d|e)
             echo -e "  ${YELLOW}该平台正在开发中，敬请期待${NC}"
-            echo "  可关注 u-claw.vercel.app 获取最新进展"
+            echo "  可关注 u-claw.org 获取最新进展"
             ;;
         f)
             echo -e "  ${CYAN}配置 Telegram${NC}"
