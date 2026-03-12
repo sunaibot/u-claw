@@ -6,7 +6,7 @@
 
 UCLAW_DIR="$(cd "$(dirname "$0")" && pwd)"
 APP_DIR="$UCLAW_DIR/app"
-CORE_DIR="$APP_DIR/core"
+CORE_DIR="$APP_DIR/core-mac"
 DATA_DIR="$UCLAW_DIR/data"
 SYSTEM_DIR="$UCLAW_DIR/system"
 

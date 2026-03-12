@@ -3,7 +3,7 @@ chcp 65001 >nul 2>&1
 title U-Claw Menu
 
 set "UCLAW_DIR=%~dp0"
-set "CORE_DIR=%UCLAW_DIR%app\core"
+set "CORE_DIR=%UCLAW_DIR%app\core-win"
 set "DATA_DIR=%UCLAW_DIR%data"
 set "STATE_DIR=%DATA_DIR%\.openclaw"
 set "NODE_DIR=%UCLAW_DIR%app\runtime\node-win-x64"

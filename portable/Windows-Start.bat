@@ -10,7 +10,7 @@ echo.
 
 set "UCLAW_DIR=%~dp0"
 set "APP_DIR=%UCLAW_DIR%app"
-set "CORE_DIR=%APP_DIR%\core"
+set "CORE_DIR=%APP_DIR%\core-win"
 set "DATA_DIR=%UCLAW_DIR%data"
 set "STATE_DIR=%DATA_DIR%\.openclaw"
 set "NODE_DIR=%APP_DIR%\runtime\node-win-x64"
