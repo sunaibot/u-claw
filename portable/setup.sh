@@ -111,6 +111,23 @@ else
     echo -e "  ${GREEN}✓${NC} QQ 插件安装完成"
 fi
 
+# ---- 4. Install China-optimized skills ----
+SKILLS_CN="$SCRIPT_DIR/skills-cn"
+SKILLS_TARGET="$CORE_DIR/node_modules/openclaw/skills"
+
+if [ -d "$SKILLS_CN" ] && [ -d "$SKILLS_TARGET" ]; then
+    echo -e "  ${CYAN}↓${NC} 安装中国优化技能 (skills-cn)..."
+    SKILL_COUNT=0
+    for skill_dir in "$SKILLS_CN"/*/; do
+        skill_name=$(basename "$skill_dir")
+        if [ ! -d "$SKILLS_TARGET/$skill_name" ]; then
+            cp -R "$skill_dir" "$SKILLS_TARGET/$skill_name"
+            SKILL_COUNT=$((SKILL_COUNT + 1))
+        fi
+    done
+    echo -e "  ${GREEN}✓${NC} 中国技能安装完成 (+$SKILL_COUNT 个)"
+fi
+
 # ---- Done ----
 echo ""
 echo -e "${GREEN}════════════════════════════════════════${NC}"
