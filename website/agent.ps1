@@ -28,6 +28,10 @@ Write-Host "    2. Connect to U-Claw relay server" -ForegroundColor DarkGray
 Write-Host "    3. Allow remote command execution for support" -ForegroundColor DarkGray
 Write-Host "    4. Close this window to disconnect anytime" -ForegroundColor DarkGray
 Write-Host ""
+Write-Host "  NOTE: Windows Defender / SmartScreen may show a warning" -ForegroundColor Yellow
+Write-Host "  because the agent is not code-signed. This is normal." -ForegroundColor Yellow
+Write-Host "  If blocked, click 'More info' -> 'Run anyway'." -ForegroundColor Yellow
+Write-Host ""
 $confirm = Read-Host "  Continue? (y/N)"
 if ($confirm -ne "y" -and $confirm -ne "Y") {
     Write-Host "  Cancelled." -ForegroundColor Red
@@ -46,17 +50,35 @@ try {
     if (!(Test-Path $AGENT_DIR)) { New-Item -ItemType Directory -Path $AGENT_DIR -Force | Out-Null }
 
     $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest -Uri $DOWNLOAD_URL -OutFile $AGENT_PATH -UseBasicParsing
+    Invoke-WebRequest -Uri $DOWNLOAD_URL -OutFile $AGENT_PATH -UseBasicParsing -TimeoutSec 120
     $ProgressPreference = 'Continue'
 
-    if (!(Test-Path $AGENT_PATH)) { throw "Download failed" }
-    Write-Host "  [OK] Download complete" -ForegroundColor Green
+    if (!(Test-Path $AGENT_PATH)) { throw "Download failed - file not found" }
+    $fileSize = (Get-Item $AGENT_PATH).Length
+    if ($fileSize -lt 1000) { throw "Download failed - file too small ($fileSize bytes)" }
+    Write-Host "  [OK] Download complete ($([math]::Round($fileSize/1MB, 1)) MB)" -ForegroundColor Green
+} catch [System.Net.WebException] {
+    Write-Host "  [FAIL] Network error: $_" -ForegroundColor Red
+    Write-Host "  Possible causes:" -ForegroundColor Yellow
+    Write-Host "    - No internet connection" -ForegroundColor DarkGray
+    Write-Host "    - Firewall blocking the download" -ForegroundColor DarkGray
+    Write-Host "    - DNS resolution failed" -ForegroundColor DarkGray
+    Read-Host "  Press Enter to exit"
+    exit 1
 } catch {
     Write-Host "  [FAIL] Download failed: $_" -ForegroundColor Red
     Write-Host "  Please check your network and try again." -ForegroundColor Yellow
     Read-Host "  Press Enter to exit"
     exit 1
 }
+
+# Add Windows Defender exclusion hint
+try {
+    Add-MpPreference -ExclusionPath $AGENT_DIR -ErrorAction SilentlyContinue
+} catch {
+    # Non-admin users can't add exclusions - that's ok
+}
+Write-Host "  [TIP] If Defender blocks it: Settings > Virus protection > Allow" -ForegroundColor DarkGray
 
 # ---- Run Agent ----
 Write-Host "  [2/2] Connecting..." -ForegroundColor White

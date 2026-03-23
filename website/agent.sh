@@ -47,18 +47,34 @@ fi
 echo ""
 
 # Download agent
-echo "  [1/2] Downloading agent..."
+echo "  [1/3] Downloading agent..."
 mkdir -p "$AGENT_DIR"
 if command -v curl &>/dev/null; then
-    curl -fsSL -o "$AGENT_PATH" "$DOWNLOAD_URL"
+    curl -fsSL --connect-timeout 15 --max-time 120 -o "$AGENT_PATH" "$DOWNLOAD_URL"
 elif command -v wget &>/dev/null; then
-    wget -q -O "$AGENT_PATH" "$DOWNLOAD_URL"
+    wget -q --timeout=120 -O "$AGENT_PATH" "$DOWNLOAD_URL"
 else
     echo "  [FAIL] Neither curl nor wget found"
     exit 1
 fi
+
+if [ ! -f "$AGENT_PATH" ] || [ ! -s "$AGENT_PATH" ]; then
+    echo "  [FAIL] Download failed or file is empty"
+    echo "  Please check your network connection and try again."
+    exit 1
+fi
+
 chmod +x "$AGENT_PATH"
 echo "  [OK] Download complete"
+
+# macOS: remove quarantine attribute to bypass Gatekeeper
+if [ "$OS" = "darwin" ]; then
+    echo "  [2/3] Removing macOS Gatekeeper quarantine..."
+    xattr -d com.apple.quarantine "$AGENT_PATH" 2>/dev/null || true
+    echo "  [OK] Gatekeeper bypass applied"
+else
+    echo "  [2/3] Skipping (not macOS)"
+fi
 
 # Cleanup on exit
 cleanup() {
@@ -70,7 +86,7 @@ cleanup() {
 trap cleanup INT TERM EXIT
 
 # Run agent
-echo "  [2/2] Connecting..."
+echo "  [3/3] Connecting..."
 echo ""
 echo "  =========================================="
 echo "    Connected! Send this ID to support:"
@@ -85,8 +101,20 @@ echo "  * Press Ctrl+C or close terminal to disconnect"
 echo "  * Auto-disconnect after ${TIMEOUT_HOURS} hours"
 echo ""
 
-# Run with timeout
-timeout "${TIMEOUT_HOURS}h" "$AGENT_PATH" \
+# Run with timeout (macOS may not have GNU timeout)
+run_with_timeout() {
+    if command -v timeout &>/dev/null; then
+        timeout "${TIMEOUT_HOURS}h" "$@"
+    elif command -v gtimeout &>/dev/null; then
+        gtimeout "${TIMEOUT_HOURS}h" "$@"
+    else
+        # Fallback: use perl alarm for timeout
+        local secs=$((TIMEOUT_HOURS * 3600))
+        perl -e "alarm $secs; exec @ARGV" -- "$@"
+    fi
+}
+
+run_with_timeout "$AGENT_PATH" \
     -server "$RELAY_SERVER" \
     -token "$TOKEN" \
     -id "$DEVICE_ID" 2>/dev/null || true
