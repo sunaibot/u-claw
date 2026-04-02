@@ -59,7 +59,7 @@ const USER_PROMPT = `请生成今天（${TODAY}）的内容，包含两部分：
 function callGLM(apiKey) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      model: 'glm-4-plus',
+      model: 'deepseek-chat',
       max_tokens: 1024,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
@@ -68,8 +68,8 @@ function callGLM(apiKey) {
     });
 
     const options = {
-      hostname: 'open.bigmodel.cn',
-      path: '/api/paas/v4/chat/completions',
+      hostname: 'api.deepseek.com',
+      path: '/chat/completions',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,9 +106,9 @@ function callGLM(apiKey) {
 }
 
 async function main() {
-  const apiKey = process.env.ZHIPU_API_KEY;
+  const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
-    console.error('ZHIPU_API_KEY not set');
+    console.error('DEEPSEEK_API_KEY not set');
     process.exit(1);
   }
 

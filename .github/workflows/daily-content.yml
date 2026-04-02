@@ -22,7 +22,7 @@ jobs:
 
       - name: Generate daily content
         env:
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: node .github/scripts/generate-daily.js
 
       - name: Commit and push changes
